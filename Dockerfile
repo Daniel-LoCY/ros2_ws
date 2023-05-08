@@ -1,14 +1,14 @@
-FROM ros:foxy
+FROM ros:noetic
 
-RUN apt update -y
+RUN apt-get update -y
+
+# 安裝缺少套件
+
+RUN apt-get install -y nvidia-cuda-toolkit libopencv-dev wget python3-pip git 
 
 # 複製yolov4範例
 
 RUN git clone https://github.com/AlexeyAB/darknet.git
-
-# 安裝缺少套件
-
-RUN apt install -y nvidia-cuda-toolkit libopencv-dev wget
 
 WORKDIR /darknet
 
@@ -24,4 +24,4 @@ RUN make
 
 # RUN wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
 
-CMD '/bin/bash'
+CMD /bin/bash
